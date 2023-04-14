@@ -1,0 +1,33 @@
+<%- include('../partials/html-head') %>
+<link rel="stylesheet" href="/stylesheets/flights/forms.css" />
+<%- include('../partials/nav') %>
+
+<main>
+  <h1><%= title %></h1>
+  <form 
+    id="new-form" 
+    action="/flights/<%= flight._id %>?_method=PUT" 
+    method="POST">
+    <label for="airline-select">Airline:</label>
+    <select name="airline" id="airline-select">
+      <option value="American" <%= flight.airline === "American" ? 'selected' : ''%>>American</option>
+      <option value="Southwest" <%= flight.airline === "Southwest" ? 'selected' : ''%>>Southwest</option>
+      <option value="United" <%= flight.airline === "United" ? 'selected' : ''%>>United</option>
+    </select>
+    <label for="airport-select">Airport:</label>
+    <select name="airport" id="airport-select">
+      <option value="AUS" <%= flight.airport === "AUS" ? 'selected' : ''%>>AUS</option>
+      <option value="DFW" <%= flight.airport === "DFW" ? 'selected' : ''%>>DFW</option>
+      <option value="DEN" <%= flight.airport === "DEN" ? 'selected' : ''%>>DEN</option>
+      <option value="LAX" <%= flight.airport === "LAX" ? 'selected' : ''%>>LAX</option>
+      <option value="SAN" <%= flight.airport === "SAN" ? 'selected' : ''%>>SAN</option>
+    </select>
+    <label for="flightNo-input">Flight Number:</label>
+    <input type="text" name="flightNo" id="flightNo-input" value="<%= flight.flightNo %>">
+    <label for="departs-select">Departure Date:</label>
+    <input type="datetime-local" name="departs" id="departs-select">
+    <button type="submit">Edit Flight</button>
+  </form>
+</main>
+
+<%- include("../partials/footer") %>

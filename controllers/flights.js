@@ -21,12 +21,7 @@ function newFlight(req,res) {
 }
 
 function create(req,res) {
-  // req.body.nowShowing = !!req.body.nowShowing
-  // if(req.body.cast) {
-  //   req.body.cast = req.body.cast.split(', ')
-  // }
   //remove empty properties to allow for default values from model
-  console.log('New flight req', req.body);
   for(let key in req.body) {
     if(req.body[key] === '') delete req.body[key]
   }

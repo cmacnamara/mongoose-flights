@@ -26,12 +26,13 @@ function create(req,res) {
   //   req.body.cast = req.body.cast.split(', ')
   // }
   //remove empty properties to allow for default values from model
+  console.log('New flight req', req.body);
   for(let key in req.body) {
     if(req.body[key] === '') delete req.body[key]
   }
   Flight.create(req.body)
   .then(flight => {
-    res.redirect('/flight')
+    res.redirect('/flights')
   })
   .catch(error => {
     console.log(error)

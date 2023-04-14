@@ -38,9 +38,9 @@ function create(req,res) {
 function show(req,res) {
   Flight.findById(req.params.id)
   .then(flight => {
-    res.render('flight/show', {
+    res.render('flights/show', {
       title: 'Flight Detail',
-      movie
+      flight
     })
   })
   .catch(error => {

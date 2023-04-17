@@ -16,8 +16,10 @@
       </tr>
     </thead>
     <tbody>
+      <% flights.sort((a,b)=>a.departs-b.departs) %>
+      <% const todaysDate = new Date() %>
       <% flights.forEach(flight => { %>
-        <tr>
+        <tr class="<%= flight.departs < todaysDate ? 'dateHasPassed' : ''%>">
           <td><%= flight.airline %></td>
           <td><%= flight.airport %></td>
           <td><%= flight.flightNo %></td>

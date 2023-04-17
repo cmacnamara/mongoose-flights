@@ -15,8 +15,12 @@ function index(req,res) {
 }
 
 function newFlight(req,res) {
+  const newFlight = new Flight();
+  const dt = newFlight.departs;
+  const departsDate = dt.toISOString().slice(0, 16);
   res.render('flights/new', {
-    title: 'Add Flight'
+    title: 'Add Flight',
+    departsDate,
   })
 }
 
@@ -63,9 +67,12 @@ function deleteFlight(req,res) {
 function edit(req,res) {
   Flight.findById(req.params.id)
   .then(flight => {
+    const dt = flight.departs;
+    const departsDate = dt.toISOString().slice(0, 16);
     res.render('flights/edit', {
       flight,
-      title: 'Edit Flight'
+      title: 'Edit Flight',
+      departsDate,
     })
   })
   .catch(error => {
@@ -75,7 +82,6 @@ function edit(req,res) {
 }
 
 function update(req,res){
-  // req.body.nowShowing = !!req.body.nowShowing
   // for(let key in req.body) {
   //   if(req.body[key] === '') delete req.body[key]
   // }

@@ -23,6 +23,8 @@ router.put('/:id', flightsCtrl.update)
 // DELETE localhost:3000/flights/:id
 router.delete('/:id', flightsCtrl.delete)
 
+router.delete('/:flightId/tickets/:ticketId', flightsCtrl.deleteTicket)
+
 // GET localhost:3000/flights/:id/edit
 router.get('/:id/edit', flightsCtrl.edit)
 

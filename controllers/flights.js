@@ -114,6 +114,27 @@ function createTicket(req,res) {
   })
 }
 
+function deleteTicket(req,res) {
+  console.log('Req params', req.params);
+  Flight.findById(req.params.flightId)
+  .then(flight => { 
+    console.log('Flight ticket subdocument', flight.tickets.id(req.params.ticketId));
+    flight.tickets.id(req.params.ticketId).remove()
+    .then(result => {
+      result.save()
+      res.redirect(`/flights/${flight._id}`)
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/')
+    })
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/')
+  })
+}
+
 export {
   index,
   newFlight as new,
@@ -122,5 +143,6 @@ export {
   deleteFlight as delete,
   edit,
   update,
-  createTicket
+  createTicket,
+  deleteTicket
 }

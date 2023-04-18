@@ -5,7 +5,8 @@ function newMeal(req,res) {
   .then(meals => {
     res.render('meals/new', {
       title: 'Add Meal',
-      meals: meals
+      meals: meals,
+      mealExists: false
     })
   })
   .catch(err => {
@@ -25,7 +26,20 @@ function create(req,res) {
   })
 }
 
+function deleteMeal(req,res) {
+  console.log('deleting meal');
+  Meal.findByIdAndDelete(req.params.mealId)
+  .then(meal => {
+    res.redirect('/meals/new')
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/')
+  })
+}
+
 export {
   newMeal as new,
   create,
+  deleteMeal as delete,
 }

@@ -9,12 +9,36 @@
     <input type="text" name="name" id="name-input">
     <button type="submit">Add Meal</button>
   </form>
-  <h2>Existing meals:</h2>
-    <ul>
-      <% meals.forEach(function(meal) { %>
-        <li><%= meal.name %></li>
+    <table>
+      <thead>
+        <tr>
+          <th>Existing Meals</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% const mealsArray = [] %>
+        <% let mealExists = false %>
+        <% meals.forEach(function(meal) { %>
+        <% if(mealsArray.includes(meal.name)) mealExists = true%>
+        <% mealsArray.push(meal.name) %>
+        <tr>
+          <td style="<%= mealExists ? 'color: red' : ''%>">
+            <%= meal.name %>
+            <span style="font-style: italic;"><%= mealExists ? '(meal already exists)' : ''%></span>
+          </td>
+          <td>
+            <form
+              action="/meals/<%= meal._id %>?_method=DELETE" 
+              method="POST"
+            >
+              <button id="del-meal-btn">X</button>
+            </form>
+          </td>
+        </tr>
       <% }) %>
-      </ul>
+      </tbody>
+    </table>
 </main>
 
 <%- include('../partials/footer') %>
